@@ -72,12 +72,19 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate, UIGestureRe
     var menuVisible: Bool!
     
     // Colors
-    let blueColor = UIColor(red: 68/255, green: 170/255, blue: 210/255, alpha: 1)
-    let yellowColor = UIColor(red: 254/255, green: 202/255, blue: 22/255, alpha: 1)
-    let brownColor = UIColor(red: 206/255, green: 150/255, blue: 98/255, alpha: 1)
-    let greenColor = UIColor(red: 85/255, green: 213/255, blue: 80/255, alpha: 1)
-    let redColor = UIColor(red: 231/255, green: 61/255, blue: 14/255, alpha: 1)
-    let grayColor = UIColor(red: 178/255, green: 178/255, blue: 178/255, alpha: 1)
+//    let blueColor = UIColor(red: 68/255, green: 170/255, blue: 210/255, alpha: 1)
+//    let yellowColor = UIColor(red: 254/255, green: 202/255, blue: 22/255, alpha: 1)
+//    let brownColor = UIColor(red: 206/255, green: 150/255, blue: 98/255, alpha: 1)
+//    let greenColor = UIColor(red: 85/255, green: 213/255, blue: 80/255, alpha: 1)
+//    let redColor = UIColor(red: 231/255, green: 61/255, blue: 14/255, alpha: 1)
+//    let grayColor = UIColor(red: 178/255, green: 178/255, blue: 178/255, alpha: 1)
+
+    let blueColor = UIColor(hexString: "#44AAD2")
+    let yellowColor = UIColor(hexString: "#FECA16")
+    let brownColor = UIColor(hexString: "#CE9662")
+    let greenColor = UIColor(hexString: "#55D550")
+    let redColor = UIColor(hexString: "#E73D0C")
+    let grayColor = UIColor(hexString: "#B2B2B2")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -120,8 +127,8 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate, UIGestureRe
         feedViewToTop = CGPoint(x: feedImageView.center.x, y: feedImageView.center.y - messageImageView.center.y*2 )
         
         
-         navSegmentedControl.tintColor = blueColor
-         navSegmentedControl.selectedSegmentIndex = 1
+        navSegmentedControl.tintColor = blueColor
+        navSegmentedControl.selectedSegmentIndex = 1
         
         // The onMessagePan: method will be defined below.
         
@@ -138,8 +145,8 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate, UIGestureRe
         let edgeGesture = UIScreenEdgePanGestureRecognizer(target: self, action: "onEdgePan:")
         edgeGesture.edges = UIRectEdge.Left
         mailboxView.addGestureRecognizer(edgeGesture)
-
-
+        
+        
         menuButton.enabled = false
         menuVisible = false
         
@@ -157,20 +164,20 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate, UIGestureRe
     
     // Slides the message back to its original place
     func messageViewGoBackWithAnimation() {
-        UIView.animateWithDuration(0.3, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut , animations: { () -> Void in
+        UIView.animateWithDuration(0.4, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut , animations: { () -> Void in
             self.messageImageView.center = self.messageImageViewOriginalCenter
             self.archiveIconView.center = self.archiveIconViewOriginalCenter
             self.laterIconView.center = self.laterIconViewOriginalCenter
             }, completion: nil)
-            print("message go back")
-
+        print("message go back")
+        
     }
     
     // Slides the message right and moves the feed up
     func messageViewGoRight() {
-        UIView.animateWithDuration(0.2, animations: { () -> Void in
-            self.messageImageView.center.x = self.messageImageViewOriginalCenter.x+500
-            self.archiveIconView.center.x = self.archiveIconViewOriginalCenter.x + 500
+        UIView.animateWithDuration(0.4, animations: { () -> Void in
+            self.messageImageView.center.x = self.messageImageViewOriginalCenter.x + 600
+            self.archiveIconView.center.x = self.archiveIconViewOriginalCenter.x + 600
             self.feedImageView.center.y = self.feedViewToTop.y
             print("message go right")
         })
@@ -178,12 +185,12 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate, UIGestureRe
     
     // Slides the message left and moves the feed up
     func messageViewGoLeft() {
-        UIView.animateWithDuration(0.2, animations: { () -> Void in
-            self.messageImageView.center.x = self.messageImageViewOriginalCenter.x - 500
-            self.laterIconView.center.x = self.laterIconViewOriginalCenter.x - 500
+        UIView.animateWithDuration(0.4, animations: { () -> Void in
+            self.messageImageView.center.x = self.messageImageViewOriginalCenter.x - 600
+            self.laterIconView.center.x = self.laterIconViewOriginalCenter.x - 600
             self.feedImageView.center.y = self.feedViewToTop.y
             print("message go left")
-
+            
         })
     }
     
@@ -225,7 +232,6 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate, UIGestureRe
             self.rescheduleImageView.alpha = 0
         })
         rescheduleImageView.userInteractionEnabled = Bool(true)
-        
     }
     
     
@@ -243,7 +249,6 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate, UIGestureRe
             self.listImageView.alpha = 0
         })
         listImageView.userInteractionEnabled = Bool(true)
-        
     }
     
     // Hide menu
@@ -286,8 +291,6 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate, UIGestureRe
         print("Pan Gesture Killed")
         
     }
-    
-    
     
     @IBAction func onMenuButton(sender: AnyObject) {
         
@@ -352,28 +355,28 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate, UIGestureRe
                     laterIconView.alpha = CGFloat(laterIconAlpha)
                 }
                 
-            } else if translation.x > 60 && translation.x < 220 {
+            } else if translation.x > 60 && translation.x < 200 {
                 // ARCHIVE
                 archiveIconsOnly()
                 messageViewContainer.backgroundColor = greenColor
                 archiveIconView.image = UIImage(named: "archive_icon")
                 archiveIconView.center = CGPoint(x: archiveIconViewOriginalCenter.x + translation.x - 60 , y: archiveIconViewOriginalCenter.y)
                 
-            } else if translation.x > 220 {
+            } else if translation.x > 200 {
                 // DELETE
                 archiveIconsOnly()
                 messageViewContainer.backgroundColor = redColor
                 archiveIconView.image = UIImage(named: "delete_icon")
                 archiveIconView.center = CGPoint(x: archiveIconViewOriginalCenter.x + translation.x - 60 , y: archiveIconViewOriginalCenter.y)
                 
-            } else if translation.x < -60 && translation.x > -220 {
+            } else if translation.x < -60 && translation.x > -200 {
                 // LATER
                 laterIconsOnly()
                 messageViewContainer.backgroundColor = yellowColor
                 laterIconView.image = UIImage(named: "later_icon")
                 laterIconView.center = CGPoint(x: laterIconViewOriginalCenter.x + translation.x + 60 , y: laterIconViewOriginalCenter.y)
                 
-            } else if translation.x < -220 {
+            } else if translation.x < -200 {
                 // LIST
                 laterIconsOnly()
                 messageViewContainer.backgroundColor = brownColor
@@ -391,7 +394,7 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate, UIGestureRe
             // After Gesture Ends
             // print("Gesture ended at \(point)")
             print("Gesture ended at \(translation) MessageView \(messageImageView.center)")
-            if translation.x > 60 && translation.x < 220 {
+            if translation.x > 60 && translation.x < 200 {
                 // Archive selected
                 if velocity.x > 0 {
                     print("archive")
@@ -405,7 +408,7 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate, UIGestureRe
                     messageViewGoBackWithAnimation()
                 }
                 
-            } else if  translation.x > 220 {
+            } else if  translation.x > 200 {
                 // Delete Selected
                 if velocity.x > 0 {
                     print("delete")
@@ -419,13 +422,13 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate, UIGestureRe
                     messageViewGoBackWithAnimation()
                 }
                 
-            } else if translation.x < -60 && translation.x > -220 {
+            } else if translation.x < -60 && translation.x > -200 {
                 // Later Selected
                 if velocity.x < 0 {
                     print("later")
                     UIView.animateWithDuration(0.3, delay: 0, options: UIViewAnimationOptions.TransitionNone, animations: { () -> Void in
-                        self.messageImageView.center.x = self.messageImageViewOriginalCenter.x - 500
-                        self.laterIconView.center.x = self.laterIconViewOriginalCenter.x - 500
+                        self.messageImageView.center.x = self.messageImageViewOriginalCenter.x - 600
+                        self.laterIconView.center.x = self.laterIconViewOriginalCenter.x - 600
                         }, completion: { (TRUE) -> Void in
                             self.rescheduleViewOn()
                     })
@@ -435,13 +438,13 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate, UIGestureRe
                     messageViewGoBackWithAnimation()
                 }
                 
-            } else if translation.x < -220 {
+            } else if translation.x < -200 {
                 // List Selected
                 if velocity.x < 0 {
                     print("list")
                     UIView.animateWithDuration(0.3, delay: 0, options: UIViewAnimationOptions.TransitionNone, animations: { () -> Void in
-                        self.messageImageView.center.x = self.messageImageViewOriginalCenter.x - 500
-                        self.laterIconView.center.x = self.laterIconViewOriginalCenter.x - 500
+                        self.messageImageView.center.x = self.messageImageViewOriginalCenter.x - 600
+                        self.laterIconView.center.x = self.laterIconViewOriginalCenter.x - 600
                         }, completion: { (TRUE) -> Void in
                             self.listViewOn()
                     })
@@ -585,11 +588,6 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate, UIGestureRe
             })
         }
     }
-
-
-
-
-    
     
     // Screen edge pan gesture recognizer
     func onEdgePan(sender: UIScreenEdgePanGestureRecognizer){
@@ -656,8 +654,6 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate, UIGestureRe
             sender.enabled = false
         }
     }
-    
-    
     
     
     /*
