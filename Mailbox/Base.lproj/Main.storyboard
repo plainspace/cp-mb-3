@@ -17,6 +17,28 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="xZs-lI-1nF" userLabel="Home Button">
+                                <rect key="frame" x="0.0" y="40" width="225" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="onArchiveMenuPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ncr-mU-aQH"/>
+                                    <action selector="onMenuHomePress:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hNx-jL-aKc"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="K4N-1q-arJ" userLabel="Later Button">
+                                <rect key="frame" x="0.0" y="170" width="225" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="onMenuLaterPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Hya-s9-FRw"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="4hB-3d-EWX" userLabel="Archive Button">
+                                <rect key="frame" x="0.0" y="260" width="225" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="onArchiveMenuPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jZ6-OD-x8M"/>
+                                </connections>
+                            </button>
                             <view opaque="NO" contentMode="scaleToFill" id="qkW-68-wIU" userLabel="Mailbox View">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -137,22 +159,29 @@
                                     <outletCollection property="gestureRecognizers" destination="brH-xM-ubs" appends="YES" id="WIW-xQ-MGb"/>
                                 </connections>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="LAM-ga-zX0">
+                                <rect key="frame" x="84" y="57" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="568"/>
                     <connections>
+                        <outlet property="archiveHomeButton" destination="4hB-3d-EWX" id="qlC-VD-v1F"/>
                         <outlet property="archiveIconView" destination="ahL-hq-xin" id="fMg-W3-9th"/>
                         <outlet property="archiveScrollView" destination="FQm-e1-LkC" id="5Xr-8S-dbI"/>
                         <outlet property="contentView" destination="8bC-Xf-vdC" id="RMO-7w-9wt"/>
                         <outlet property="createButton" destination="jch-xM-8XP" id="vPk-WB-7s1"/>
                         <outlet property="feedImageView" destination="sKw-vc-ubr" id="d0I-xz-hfc"/>
+                        <outlet property="laterHomeButton" destination="K4N-1q-arJ" id="W9D-so-d8f"/>
                         <outlet property="laterIconView" destination="190-NZ-hoA" id="vLA-Nt-1Ht"/>
                         <outlet property="laterScrollView" destination="MB4-Va-OQt" id="CrF-bd-W64"/>
                         <outlet property="listImageView" destination="KDL-ge-VJd" id="GLl-oo-Pae"/>
                         <outlet property="mailboxView" destination="qkW-68-wIU" id="Rtt-KM-Cor"/>
                         <outlet property="menuButton" destination="D9U-1L-3SS" id="Huw-jv-k0c"/>
+                        <outlet property="menuHomeButton" destination="xZs-lI-1nF" id="Du3-cs-We8"/>
                         <outlet property="menuImageView" destination="Gpg-KK-ffq" id="S3H-TP-pdD"/>
                         <outlet property="messageImageView" destination="6Yu-32-tCe" id="69a-Xa-Rs5"/>
                         <outlet property="messageViewContainer" destination="WcH-WI-9Ao" id="bgA-dU-i9U"/>

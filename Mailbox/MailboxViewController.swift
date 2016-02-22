@@ -57,11 +57,15 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate, UIGestureRe
     @IBOutlet weak var menuButton: UIButton!
     @IBOutlet weak var createButton: UIButton!
     
+    @IBOutlet weak var menuHomeButton: UIButton!
+    @IBOutlet weak var laterHomeButton: UIButton!
+    @IBOutlet weak var archiveHomeButton: UIButton!
+    
     @IBOutlet weak var navSegmentedControl: UISegmentedControl!
     
     @IBOutlet var panGestureRecognizer: UIPanGestureRecognizer!
     
-    // Original Centers
+    // Original Centers Becase Original Centers
     var messageImageViewOriginalCenter: CGPoint!
     var archiveIconViewOriginalCenter: CGPoint!
     var laterIconViewOriginalCenter: CGPoint!
@@ -71,14 +75,15 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate, UIGestureRe
     
     var menuVisible: Bool!
     
-    // Colors
+    // RGB Colors
 //    let blueColor = UIColor(red: 68/255, green: 170/255, blue: 210/255, alpha: 1)
 //    let yellowColor = UIColor(red: 254/255, green: 202/255, blue: 22/255, alpha: 1)
 //    let brownColor = UIColor(red: 206/255, green: 150/255, blue: 98/255, alpha: 1)
 //    let greenColor = UIColor(red: 85/255, green: 213/255, blue: 80/255, alpha: 1)
 //    let redColor = UIColor(red: 231/255, green: 61/255, blue: 14/255, alpha: 1)
 //    let grayColor = UIColor(red: 178/255, green: 178/255, blue: 178/255, alpha: 1)
-
+    
+    // Hex Colors
     let blueColor = UIColor(hexString: "#44AAD2")
     let yellowColor = UIColor(hexString: "#FECA16")
     let brownColor = UIColor(hexString: "#CE9662")
@@ -113,6 +118,14 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate, UIGestureRe
         rescheduleImageView.userInteractionEnabled = Bool(false)
         listImageView.userInteractionEnabled = Bool(false)
         
+        menuHomeButton.userInteractionEnabled = Bool(false)
+        laterHomeButton.userInteractionEnabled = Bool(false)
+        archiveHomeButton.userInteractionEnabled = Bool(false)
+        
+        menuHomeButton.enabled = false
+        laterHomeButton.enabled = false
+        archiveHomeButton.enabled = false
+        
         messageImageViewOriginalCenter = messageImageView.center
         
         archiveIconViewOriginalCenter = archiveIconView.center
@@ -126,7 +139,6 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate, UIGestureRe
         feedImageViewOriginalCenter = feedImageView.center
         feedViewToTop = CGPoint(x: feedImageView.center.x, y: feedImageView.center.y - messageImageView.center.y*2 )
         
-        
         navSegmentedControl.tintColor = blueColor
         navSegmentedControl.selectedSegmentIndex = 1
         
@@ -136,8 +148,7 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate, UIGestureRe
         
         messageGestureRecognizer.delegate = self;
         
-        // Attach it to a view of your choice. If it's a UIImageView, remember to enable user interaction
-        
+        // Attach it to a view. If it's a UIImageView, remember to enable user interaction
         messageViewContainer.addGestureRecognizer(messageGestureRecognizer)
         
         messageImageView.addGestureRecognizer(messageGestureRecognizer)
@@ -145,7 +156,6 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate, UIGestureRe
         let edgeGesture = UIScreenEdgePanGestureRecognizer(target: self, action: "onEdgePan:")
         edgeGesture.edges = UIRectEdge.Left
         mailboxView.addGestureRecognizer(edgeGesture)
-        
         
         menuButton.enabled = false
         menuVisible = false
@@ -251,9 +261,15 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate, UIGestureRe
         listImageView.userInteractionEnabled = Bool(true)
     }
     
-    // Hide menu
+    // Hide the menu
     func hideMenu() {
         print("Menu Hidden")
+//        menuHomeButton.userInteractionEnabled = Bool(false)
+//        menuHomeButton.enabled = false
+//        laterHomeButton.userInteractionEnabled = Bool(false)
+//        laterHomeButton.enabled = false
+//        archiveHomeButton.userInteractionEnabled = Bool(false)
+//        archiveHomeButton.enabled = false
         UIView.animateWithDuration(0.4, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: [], animations: { () -> Void in
             self.mailboxView.center.x = self.mailboxViewOriginalCenter.x
             }, completion: nil)
@@ -262,9 +278,15 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate, UIGestureRe
         
     }
     
-    // Show menu
+    // Show the menu
     func showMenu() {
         print("Menu Shown")
+//        menuHomeButton.userInteractionEnabled = Bool(true)
+//        menuHomeButton.enabled = true
+//        laterHomeButton.userInteractionEnabled = Bool(true)
+//        laterHomeButton.enabled = true
+//        archiveHomeButton.userInteractionEnabled = Bool(true)
+//        archiveHomeButton.enabled = true
         // self.menuImageView.transform = CGAffineTransformMakeScale(0.8, 1)
         UIView.animateWithDuration(0.4, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: [], animations: { () -> Void in
             self.mailboxView.center.x = self.mailboxViewOriginalCenter.x + 270}, completion: nil)
@@ -653,6 +675,37 @@ class MailboxViewController: UIViewController, UIScrollViewDelegate, UIGestureRe
         } else {
             sender.enabled = false
         }
+    }
+    
+    @IBAction func onMenuHomePress(sender: AnyObject) {
+        UIView.animateWithDuration(0.4, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: [], animations: { () -> Void in
+            self.mailboxView.center.x = self.mailboxViewOriginalCenter.x
+            }, completion: nil)
+        
+    }
+    
+//    @IBAction func onMenuHomePress(sender: AnyObject) {
+//        UIView.animateWithDuration(0.4, animations: { () -> Void in
+//            self.mailboxView.center = CGPoint(x: self.mailboxViewOriginalCenter.x + 0, y: self.mailboxViewOriginalCenter.y)
+//            
+//            }, completion: { (Bool) -> Void in
+//        })
+//        
+//        
+//    }
+
+    @IBAction func onMenuLaterPressed(sender: AnyObject) {
+        UIView.animateWithDuration(0.4, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: [], animations: { () -> Void in
+            self.laterScrollView.center.x = self.laterIconViewOriginalCenter.x
+            }, completion: nil)
+        
+    }
+    
+    @IBAction func onArchiveMenuPressed(sender: AnyObject) {
+        UIView.animateWithDuration(0.4, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: [], animations: { () -> Void in
+            self.archiveScrollView.center.x = self.archiveIconViewOriginalCenter.x
+            }, completion: nil)
+        
     }
     
     
