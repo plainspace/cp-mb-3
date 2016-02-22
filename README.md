@@ -33,6 +33,6 @@ The purpose of this homework is to leverage views, view properties, and events t
 
 Walkthrough of requirements and optionals:
 
-![Video Walkthrough](gif.gif)
+![Video Walkthrough](mailbox.gif)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
